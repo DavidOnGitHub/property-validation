@@ -1,6 +1,6 @@
-# valuation
+# property-validation
 
-Chainable valuation for any JS application such as Angular, React and Node applications. Designed to be used as ES6 class. Works with redux-form out of the box.
+Chainable validation of object properties for any JS application such as Angular, React and Node applications. Designed to be used as ES6 class. Works with redux-form out of the box.
 
 ## Features
 
@@ -12,22 +12,22 @@ Chainable valuation for any JS application such as Angular, React and Node appli
       .validEmail('email')
       .getErrors();
     ```
-    
+
 * Supports nested path, e.g.
     ```js
     const validate = new Validation()
       .require('address.street.name')
       .getErrors();
     ```
-    
+
 * Supports array in path, e.g.
     ```js
     const validate = new Validation()
       .require('other.hobbies.type') // hobbies is an array
       .getErrors();
     ```
-    
-* Works with redux-form out of the box, [e.g.](https://github.com/DavidOnGitHub/valuation/new/master?readme=1#use-with-redux-form)
+
+* Works with redux-form out of the box, [example here](https://github.com/DavidOnGitHub/property-validation#use-with-redux-form)
 
 * Can be extended with custom validations
     ```js
@@ -36,7 +36,7 @@ Chainable valuation for any JS application such as Angular, React and Node appli
         return this.validation(field, message || 'customized default message', value => myValiateFunc(value));
       }
     }
-    
+
     const validate = new MyValidation()
       .require('firstName')
       .validateMyField('fieldName', 'customized message')
@@ -46,7 +46,13 @@ Chainable valuation for any JS application such as Angular, React and Node appli
 ## Installation
 
 ```bash
-npm install valuation --save
+npm install property-validation --save
+```
+
+## Test
+
+```bash
+npm test
 ```
 
 ## Usage
@@ -88,11 +94,11 @@ class Example extends Component {
           <div>
             { fields.map((hobby, index) => (
                 <div key={index}>
-                    <Field 
+                    <Field
                         name={`${hobby}.type`}
                         component={Input}
                     >
-                    <Field 
+                    <Field
                         name={`${hobby}.name`}
                         component={Input}
                     >
@@ -163,11 +169,11 @@ export default reduxForm({
       const errors = new Validation(values)
         .require('persons.hobbies.type', 'missing')
         .getErrors();
-        
+
       expect(errors).to.deep.equal({
         persons: [
           undefined,
-          { 
+          {
             hobbies: [
               { type: 'missing' }
             ]
@@ -175,7 +181,7 @@ export default reduxForm({
         ]
       }); // true
     ```
-    
+
 * Validations, except for require, do not validate null or undefined values. For example, if ```values.firstName``` is undefined, ```new Validation(values).validInteger('firstName')``` does not give validation error. In order to validate null or undefined values, 'require' should be added before other validations in the chain. E.g. ```new Validation(values).require('firstName').validInteger('firstName')```.
 
 * In order to extend ```Validation``` with custom validations, ```this.validation()``` should be used if it is to validate against a specified path, e.g.
@@ -197,5 +203,5 @@ export default reduxForm({
       }
     }
     ```
-    
+
 # Pull Requests welcomed!!
