@@ -1,0 +1,13 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "mocha": true
+    },
+    "plugins": ["import"],
+    "extends": ["eslint:recommended"],
+    "rules": {
+        "no-console": "off",
+        "semi": ["error", "always"],
+        "object-curly-spacing": ["error", "always"]
+    }
+}

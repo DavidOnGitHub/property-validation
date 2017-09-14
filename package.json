@@ -1,0 +1,34 @@
+{
+    "name": "validation",
+    "version": "1.0.0",
+    "description": "Makes validation easy for frontend or backend apps",
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "babel -s inline -d lib src",
+        "test": "mocha --compilers js:babel-core/register ./test",
+        "lint": "eslint src test"
+    },
+    "keywords": [
+        "validation",
+        "validate",
+        "validator",
+        "redux-form",
+        "node"
+    ],
+    "author": "davidongithub",
+    "license": "ISC",
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.0",
+        "babel-eslint": "^7.2.3",
+        "babel-preset-es2015": "^6.24.1",
+        "chai": "^4.1.2",
+        "eslint": "^4.6.1",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-node": "^5.1.1",
+        "mocha": "^3.5.3"
+    },
+    "dependencies": {
+        "lodash": "^4.17.4"
+    }
+}
