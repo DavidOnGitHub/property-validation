@@ -70,20 +70,20 @@ export default class Validation {
     }
 
     validEmail(field, message) {
-        return this.validation(field, message, value => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value));
+        return this.validation(field, message || 'invalid email', value => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value));
     }
 
     validInteger(field, message) {
         return this.validation(field, message || 'invalid integer', _.isInteger);
     }
 
-    maxLength(field, message, maxLength) {
-        return this.validation(field, message, value => value.length <= maxLength);
+    maxLength(field, maxLength, message) {
+        return this.validation(field, message || 'max length exceeded', value => value.length <= maxLength);
     }
 
-    containsOnly(propList, message) {
-        if (!_.keys(this.values).every(key => propList.indexOf(key) >= 0)) {
-            this.errors.body = message || `body should only contain ${propList.join(', ')}`;
+    containsOnly(fieldList, message) {
+        if (!_.keys(this.values).every(key => fieldList.indexOf(key) >= 0)) {
+            this.errors.body = message || `body should only contain ${fieldList.join(', ')}`;
         }
         return this;
     }

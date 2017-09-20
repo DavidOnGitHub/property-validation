@@ -21,14 +21,14 @@ describe('Validation', () => {
     it('should give error when length is over maxLength', () => {
         let values = { firstName: 'John' };
         let errors = new Validation(values)
-            .maxLength('firstName', 'firstName is too long', 4)
+            .maxLength('firstName', 4, 'firstName is too long')
             .getErrors();
 
         expect(errors.firstName).to.be.undefined;
 
         values = { firstName: 'John' };
         errors = new Validation(values)
-            .maxLength('firstName', 'firstName is too long', 3)
+            .maxLength('firstName', 3, 'firstName is too long')
             .getErrors();
 
         expect(errors.firstName).to.equal('firstName is too long');

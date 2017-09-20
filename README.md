@@ -131,6 +131,45 @@ export default reduxForm({
 })
 ```
 
+# Existing validations
+* validEmail(fieldName, message)
+    fieldName: required. The key of the property.
+    message: optional. Default message is 'invalid email'.
+    ```js
+    new Validation(values).validEmail('email', 'Email is invalid').getErrors()
+    ```
+* validInteger(fieldName, message)
+    fieldName: required. The key of the property.
+    message: optional. Default message is 'invalid integer'.
+    ```js
+    new Validation(values).validInteger('age', 'Number is not integer').getErrors()
+    ```
+* maxLength(fieldName, maxLength, message)
+    fieldName: required. The key of the property.
+    maxLength: required. Maximum length of the string.
+    message: optional. Default message is 'max length exceeded'.
+
+    ```js
+    new Validation(values).maxLength('password', 20, 'Password is too long').getErrors()
+    ```
+* containsOnly(fieldList, message)
+    fieldList: required. An array of valid keys of the property.
+    message: optional. Default message is \`body should only contain ${fieldList.join(', ')}\`.
+
+    ```js
+    new Validation(values).containsOnly(['username', 'password'], 'body should only contain username, password').getErrors()
+    ```
+* require(fieldName, message)
+    fieldName: required. The key of the property, or '/' which means the property itself.
+    message: optional. Default message is 'property is required but missing' or 'body is required but missing'.
+
+    ```js
+    new Validation(values).require('email', 'require email').getErrors()
+    new Validation(values).require('/', 'body cannot be empty').getErrors()
+    ```
+
+Pull Requests are welcomed to add more validations!
+
 # Notes
 
 * For nested properties with arrays, validation message for first element will be undefined if validation passed for the first element but failed for one of the rest. e.g.
