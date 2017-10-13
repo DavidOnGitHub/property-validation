@@ -92,6 +92,8 @@ export default class Validation {
         if (field === '/' && _.isEmpty(this.values)) {
             this.errors.body = message || 'body is required but missing';
             return this;
+        } else if (field === '/') {
+            return this;
         }
         return this.validation(field, message || 'property is required but missing', value => !!value, true);
     }

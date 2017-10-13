@@ -84,6 +84,22 @@ describe('Validation', () => {
         expect(errors.person.lastName).to.equal('last name is required');
     });
 
+    it('should validate against body', () => {
+        let values = {
+            person: { firstName: 'John', lastName: 'Smith' }
+        };
+        let errors = new Validation(values)
+            .require('/')
+            .getErrors();
+        expect(errors).is.empty;
+
+        values = {};
+        errors = new Validation(values)
+            .require('/', 'body is required')
+            .getErrors();
+        expect(errors.body).to.equal('body is required');
+    });
+
     it('should validate nested property with arrays', () => {
         let values = {
             persons: [
