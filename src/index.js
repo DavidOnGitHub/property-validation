@@ -39,7 +39,7 @@ const getPaths = (obj, fields) => {
     return paths;
 };
 
-export default class Validation {
+export class Validation {
     constructor(values) {
         this.values = values;
         this.errors = {};

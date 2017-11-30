@@ -60,7 +60,7 @@ npm test
 ### Simple use
 
 ```js
-import Validation from 'validation';
+import { Validation } from 'property-validation';
 import { expect } from 'chai';
 
 const values = {

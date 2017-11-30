@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Validation from '../src/index';
+import { Validation } from '../src/index';
 
 describe('Validation', () => {
     it('should give error when required field is missing', () => {
