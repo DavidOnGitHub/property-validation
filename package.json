@@ -1,6 +1,6 @@
 {
     "name": "property-validation",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Makes validation easy for frontend or backend apps",
     "main": "lib/index.js",
     "scripts": {
