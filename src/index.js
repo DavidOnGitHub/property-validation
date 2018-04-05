@@ -16,13 +16,13 @@ const getPaths = (obj, fields) => {
     const path = [];
     let returnPaths = false;
 
-    fields.forEach((field) => {
+    fields.forEach((field, index) => {
         if (returnPaths) {
             return;
         }
         const nextPath = [...path, field];
         const value = getProperty(obj, nextPath);
-        if (Array.isArray(value)) {
+        if (Array.isArray(value) && index < fields.length - 1) {
             for (let i = 0; i < value.length; i += 1) {
                 const subPaths = getPaths(value[i], fields.slice(nextPath.length));
                 subPaths.forEach(subPath => paths.push([...nextPath, i, ...subPath]));
@@ -86,6 +86,10 @@ export class Validation {
             this.errors.body = message || `body should only contain ${fieldList.join(', ')}`;
         }
         return this;
+    }
+
+    notEmptyArray(field, message) {
+        return this.validation(field, message || 'not array or empty array', value => Array.isArray(value) && value.length > 0);
     }
 
     require(field, message) {

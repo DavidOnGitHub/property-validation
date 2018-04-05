@@ -159,4 +159,36 @@ describe('Validation', () => {
             persons: [{ hobbies: [undefined, { type: 'should be integer' }] }, { hobbies: [{ type: 'should be integer' }] }]
         });
     });
+
+    it('should validate arrays', () => {
+        let values = {
+            persons: [
+                {
+                    firstName: 'John',
+                    lastName: 'Smith',
+                    hobbies: [
+                        { type: 'sport', value: 'soccer' },
+                        { type: 'sport', value: 'basketball' },
+                    ]
+                },
+                {
+                    firstName: 'Alex',
+                    lastName: 'Gordon',
+                    hobbies: []
+                },
+            ]
+        };
+        let errors = new Validation(values)
+            .notEmptyArray('persons.hobbies', 'array is empty')
+            .getErrors();
+
+        expect(errors).to.deep.equal({
+            persons: [
+                undefined,
+                {
+                    hobbies: 'array is empty'
+                }
+            ]
+        });
+    });
 });
